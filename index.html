@@ -561,28 +561,24 @@
   <p class="sub">Drop the skill into your Claude Code setup. Every ServiceNow-styled output comes out right the first time.</p>
 
   <div class="install-box">
-    <p class="code-label">Option 1 — Clone from GitHub</p>
+    <p class="code-label">Option 1 — .skill file (Claude Code &amp; Claude.ai)</p>
+    <pre>1. Download servicenow-design.skill from the GitHub release (button below)
+2. Claude Code: drag the .skill file into the chat window
+   Claude.ai:   Settings → Skills → Import .skill file</pre>
+
+    <p class="code-label">Option 2 — Clone from GitHub (Claude Code)</p>
     <pre>git clone https://github.com/wiz0floyd/servicenow-design-skill.git
 cp -r servicenow-design-skill/skill ~/.claude/skills/servicenow-design</pre>
 
-    <p class="code-label">Option 2 — Download zip</p>
+    <p class="code-label">Option 3 — Download zip (Claude Code)</p>
     <pre>1. Download servicenow-design.zip (button below)
 2. Unzip and move the folder to ~/.claude/skills/servicenow-design</pre>
-
-    <p class="code-label">Verify install</p>
-    <pre>~/.claude/skills/servicenow-design/
-├── SKILL.md                    ← 44-line workflow
-└── references/
-    ├── tokens.md               ← colors, typography, hero formula
-    ├── components.md           ← component prompts + checklist
-    ├── design-light.md         ← full light-mode spec
-    └── design-dark.md          ← full dark-mode spec</pre>
   </div>
 
   <div class="cta-row">
-    <a href="https://github.com/wiz0floyd/servicenow-design-skill" target="_blank" rel="noopener" class="btn-primary">View on GitHub ↗</a>
+    <a href="https://github.com/wiz0floyd/servicenow-design-skill/releases/latest" target="_blank" rel="noopener" class="btn-primary">Download .skill ↗</a>
+    <a href="https://github.com/wiz0floyd/servicenow-design-skill" target="_blank" rel="noopener" class="btn-outline">View on GitHub ↗</a>
     <a href="https://servicenow-my.sharepoint.com/:u:/p/adam_celli/IQDyAtO677RvSaSa_oDP-7mnAb9ZKlAg3vd7I_5hx-S7KN8?e=BY4vFX" target="_blank" rel="noopener" class="btn-outline">Download .zip</a>
-    <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener" class="btn-outline">View awesome-design-md ↗</a>
   </div>
 </section>
 
