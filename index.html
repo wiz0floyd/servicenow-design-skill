@@ -561,19 +561,27 @@
   <p class="sub">Drop the skill into your Claude Code setup. Every ServiceNow-styled output comes out right the first time.</p>
 
   <div class="install-box">
-    <p class="code-label">Skill location</p>
-    <pre>~/.claude/skills/servicenow-design/</pre>
+    <p class="code-label">Option 1 — Clone from GitHub</p>
+    <pre>git clone https://github.com/wiz0floyd/servicenow-design-skill.git
+cp -r servicenow-design-skill/skill ~/.claude/skills/servicenow-design</pre>
 
-    <p class="code-label">Files included</p>
-    <pre>SKILL.md                        ← 44-line workflow
-references/tokens.md            ← colors, typography, hero formula
-references/components.md        ← component prompts + checklist
-references/design-light.md      ← full light-mode spec
-references/design-dark.md       ← full dark-mode spec</pre>
+    <p class="code-label">Option 2 — Download zip</p>
+    <pre>1. Download servicenow-design.zip (button below)
+2. Unzip and move the folder to ~/.claude/skills/servicenow-design</pre>
+
+    <p class="code-label">Verify install</p>
+    <pre>~/.claude/skills/servicenow-design/
+├── SKILL.md                    ← 44-line workflow
+└── references/
+    ├── tokens.md               ← colors, typography, hero formula
+    ├── components.md           ← component prompts + checklist
+    ├── design-light.md         ← full light-mode spec
+    └── design-dark.md          ← full dark-mode spec</pre>
   </div>
 
   <div class="cta-row">
-    <a href="https://servicenow-my.sharepoint.com/:u:/p/adam_celli/IQDyAtO677RvSaSa_oDP-7mnAb9ZKlAg3vd7I_5hx-S7KN8?e=BY4vFX" target="_blank" rel="noopener" class="btn-primary">Download servicenow-design.zip</a>
+    <a href="https://github.com/wiz0floyd/servicenow-design-skill" target="_blank" rel="noopener" class="btn-primary">View on GitHub ↗</a>
+    <a href="https://servicenow-my.sharepoint.com/:u:/p/adam_celli/IQDyAtO677RvSaSa_oDP-7mnAb9ZKlAg3vd7I_5hx-S7KN8?e=BY4vFX" target="_blank" rel="noopener" class="btn-outline">Download .zip</a>
     <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener" class="btn-outline">View awesome-design-md ↗</a>
   </div>
 </section>
