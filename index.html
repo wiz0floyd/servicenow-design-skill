@@ -87,48 +87,6 @@
     }
     .btn-nav:hover { background: #78e85f; }
 
-    /* ─── Sub-nav ─── */
-    .sub-nav {
-      background: #032d42;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      padding: 0 48px;
-      display: flex;
-      align-items: stretch;
-      overflow-x: auto;
-    }
-    .sub-nav-label {
-      font-size: 14px;
-      font-weight: 700;
-      color: #ffffff;
-      padding: 0 28px 0 0;
-      margin-right: 8px;
-      border-right: 1px solid rgba(255,255,255,0.15);
-      display: flex;
-      align-items: center;
-      white-space: nowrap;
-    }
-    .sub-nav-tabs {
-      display: flex;
-      list-style: none;
-    }
-    .sub-nav-tabs a {
-      display: flex;
-      align-items: center;
-      padding: 0 18px;
-      height: 48px;
-      font-size: 14px;
-      font-weight: 400;
-      color: rgba(255,255,255,0.65);
-      text-decoration: none;
-      border-bottom: 3px solid transparent;
-      white-space: nowrap;
-    }
-    .sub-nav-tabs a:hover { color: #ffffff; }
-    .sub-nav-tabs a.active {
-      color: #ffffff;
-      border-bottom-color: #63df4e;
-    }
-
     /* ─── Hero ─── */
     .hero {
       background: #032d42;
@@ -490,17 +448,6 @@
   <a href="#install" class="btn-nav">Get the Skill</a>
 </nav>
 
-<!-- Sub-nav -->
-<nav class="sub-nav">
-  <span class="sub-nav-label">Claude Code Skills</span>
-  <ul class="sub-nav-tabs">
-    <li><a href="#" class="active" data-section="">Overview</a></li>
-    <li><a href="#features" data-section="features">Features</a></li>
-    <li><a href="#how-it-works" data-section="how-it-works">How It Works</a></li>
-    <li><a href="#install" data-section="install">Install</a></li>
-  </ul>
-</nav>
-
 <!-- Hero -->
 <section class="hero" id="overview">
   <canvas id="particle-canvas"></canvas>
@@ -705,22 +652,6 @@ references/design-dark.md       ← full dark-mode spec</pre>
     build();
   })();
 
-  /* ── Sub-nav active state ── */
-  (function () {
-    const links = document.querySelectorAll('.sub-nav-tabs a');
-    const sections = ['features', 'how-it-works', 'install'];
-
-    window.addEventListener('scroll', () => {
-      let current = '';
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el && window.scrollY >= el.offsetTop - 80) current = id;
-      }
-      links.forEach(a => {
-        a.classList.toggle('active', a.dataset.section === current);
-      });
-    });
-  })();
 </script>
 </body>
 </html>
