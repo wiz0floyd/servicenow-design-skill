@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ServiceNow Design Skill — Claude Code</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, system-ui, sans-serif;
+      background: #032d42;
+      color: #ffffff;
+      overflow-x: hidden;
+    }
+
+    /* ─── Aurora Banner ─── */
+    .aurora-banner {
+      background: linear-gradient(90deg, #b4ea9f 0%, #7fd8ce 40%, #52b8ff 70%, #9c87df 100%);
+      color: #032d42;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 1.43;
+      padding: 11px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .aurora-banner a {
+      color: #032d42;
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid #032d42;
+      border-radius: 500px;
+      padding: 4px 14px;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+    .aurora-banner a:hover { background: rgba(3,45,66,0.1); }
+
+    /* ─── Nav ─── */
+    nav {
+      background: #032d42;
+      padding: 0 48px;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .nav-logo {
+      font-size: 20px;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: -0.2px;
+      text-decoration: none;
+    }
+    .nav-logo .dot { color: #63df4e; }
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 400;
+    }
+    .nav-links a:hover { color: #ffffff; }
+    .btn-nav {
+      background: #63df4e;
+      color: #032d42;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 9px 22px;
+      border-radius: 500px;
+      text-decoration: none;
+    }
+    .btn-nav:hover { background: #78e85f; }
+
+    /* ─── Sub-nav ─── */
+    .sub-nav {
+      background: #032d42;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      padding: 0 48px;
+      display: flex;
+      align-items: stretch;
+      overflow-x: auto;
+    }
+    .sub-nav-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      padding: 0 28px 0 0;
+      margin-right: 8px;
+      border-right: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      white-space: nowrap;
+    }
+    .sub-nav-tabs {
+      display: flex;
+      list-style: none;
+    }
+    .sub-nav-tabs a {
+      display: flex;
+      align-items: center;
+      padding: 0 18px;
+      height: 48px;
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+    }
+    .sub-nav-tabs a:hover { color: #ffffff; }
+    .sub-nav-tabs a.active {
+      color: #ffffff;
+      border-bottom-color: #63df4e;
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: #032d42;
+      position: relative;
+      overflow: hidden;
+      padding: 100px 48px 96px;
+      text-align: center;
+    }
+    #particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 24px;
+    }
+    .hero-headline {
+      font-size: 64px;
+      font-weight: 700;
+      line-height: 1.10;
+      letter-spacing: -0.64px;
+      color: #ffffff;
+      margin-bottom: 24px;
+    }
+    .hero-headline .green { color: #63df4e; }
+    .hero-body {
+      font-size: 18px;
+      font-weight: 400;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.78);
+      max-width: 580px;
+      margin: 0 auto 44px;
+    }
+    .cta-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #63df4e;
+      color: #032d42;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 13px 30px;
+      border-radius: 500px;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: #78e85f; }
+    .btn-outline {
+      background: transparent;
+      color: #ffffff;
+      font-weight: 400;
+      font-size: 16px;
+      padding: 13px 30px;
+      border-radius: 500px;
+      text-decoration: none;
+      border: 2px solid #ffffff;
+    }
+    .btn-outline:hover { background: rgba(255,255,255,0.08); }
+
+    /* ─── Sections ─── */
+    .section-dark {
+      background: #032d42;
+      padding: 88px 48px;
+    }
+    .section-white {
+      background: #ffffff;
+      padding: 88px 48px;
+    }
+    .section-title {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.10;
+      letter-spacing: -0.48px;
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-dark .section-title { color: #ffffff; }
+    .section-white .section-title { color: #032d42; }
+
+    /* ─── Cards ─── */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .card {
+      background: #042f45;
+      border: 1px solid rgba(255,255,255,0.10);
+      border-radius: 24px;
+      padding: 32px;
+    }
+    .card-tag {
+      display: inline-block;
+      color: #63df4e;
+      border: 1px solid #63df4e;
+      border-radius: 500px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 3px 12px;
+      margin-bottom: 16px;
+    }
+    .card h3 {
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.20;
+      letter-spacing: -0.2px;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    .card p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.60;
+      color: rgba(255,255,255,0.78);
+    }
+    .card p code {
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      color: #63df4e;
+      background: rgba(99,223,78,0.12);
+      border-radius: 500px;
+      padding: 1px 7px;
+    }
+
+    /* ─── Benefit grid ─── */
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 48px;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+    .benefit h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #032d42;
+      margin-bottom: 10px;
+      letter-spacing: -0.2px;
+    }
+    .benefit p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.60;
+      color: #1d1d1d;
+    }
+
+    /* ─── Steps ─── */
+    .steps {
+      max-width: 780px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .step {
+      display: flex;
+      gap: 24px;
+      align-items: flex-start;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      border-radius: 500px;
+      background: #63df4e;
+      color: #032d42;
+      font-size: 18px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .step-body h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.18px;
+    }
+    .step-body p {
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.60;
+      color: rgba(255,255,255,0.78);
+    }
+    .step-body p code {
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      color: #63df4e;
+      background: rgba(99,223,78,0.12);
+      border-radius: 500px;
+      padding: 1px 7px;
+    }
+
+    /* ─── Install section ─── */
+    .install-section {
+      background: #032d42;
+      padding: 88px 48px;
+      text-align: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .install-section h2 {
+      font-size: 48px;
+      font-weight: 700;
+      line-height: 1.10;
+      letter-spacing: -0.48px;
+      color: #ffffff;
+      margin-bottom: 16px;
+    }
+    .install-section .sub {
+      font-size: 18px;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 48px;
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .install-box {
+      background: #042f45;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px 40px;
+      max-width: 660px;
+      margin: 0 auto 40px;
+      text-align: left;
+    }
+    .code-label {
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 10px;
+    }
+    .install-box pre {
+      font-family: 'Inter', monospace;
+      font-size: 13px;
+      color: #63df4e;
+      background: rgba(99,223,78,0.08);
+      border: 1px solid rgba(99,223,78,0.18);
+      border-radius: 16px;
+      padding: 14px 18px;
+      line-height: 1.75;
+      overflow-x: auto;
+      margin-bottom: 20px;
+    }
+    .install-box pre:last-child { margin-bottom: 0; }
+
+    /* ─── Footer ─── */
+    footer {
+      background: #032d42;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding: 36px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .footer-logo {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+    .footer-logo .dot { color: #63df4e; }
+    .footer-meta {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.55;
+      text-align: center;
+    }
+    .footer-meta a {
+      color: #00718f;
+      text-decoration: none;
+    }
+    .footer-meta a:hover { color: #7fd8ce; }
+    .footer-note {
+      font-size: 12px;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ─── Floating FABs ─── */
+    .fab-stack {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 200;
+    }
+    .fab {
+      background: #63df4e;
+      color: #032d42;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 10px 18px;
+      border-radius: 500px;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      white-space: nowrap;
+    }
+    .fab:hover { background: #78e85f; }
+    .fab svg { flex-shrink: 0; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 960px) {
+      .card-grid, .benefit-grid { grid-template-columns: 1fr; }
+      .hero-headline { font-size: 42px; letter-spacing: -0.42px; }
+      .section-title, .install-section h2, .cta-section h2 { font-size: 34px; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .sub-nav { padding: 0 24px; }
+      .section-dark, .section-white, .install-section { padding: 60px 24px; }
+      .hero { padding: 72px 24px 64px; }
+      .fab-stack { display: none; }
+      footer { padding: 28px 24px; flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Aurora Banner -->
+<div class="aurora-banner">
+  Design tokens sourced from <strong>awesome-design-md</strong> — a catalog of AI-ready brand design systems for Claude Code.
+  <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener">View on GitHub ↗</a>
+</div>
+
+<!-- Nav -->
+<nav>
+  <a href="#" class="nav-logo">servicenow<span class="dot">.</span></a>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how-it-works">How It Works</a></li>
+    <li><a href="#install">Install</a></li>
+  </ul>
+  <a href="#install" class="btn-nav">Get the Skill</a>
+</nav>
+
+<!-- Sub-nav -->
+<nav class="sub-nav">
+  <span class="sub-nav-label">Claude Code Skills</span>
+  <ul class="sub-nav-tabs">
+    <li><a href="#" class="active" data-section="">Overview</a></li>
+    <li><a href="#features" data-section="features">Features</a></li>
+    <li><a href="#how-it-works" data-section="how-it-works">How It Works</a></li>
+    <li><a href="#install" data-section="install">Install</a></li>
+  </ul>
+</nav>
+
+<!-- Hero -->
+<section class="hero" id="overview">
+  <canvas id="particle-canvas"></canvas>
+  <div class="hero-inner">
+    <p class="eyebrow">Claude Code &middot; Skills &middot; servicenow-design</p>
+    <h1 class="hero-headline">
+      Put <span class="green">design</span><br>to work for your team.
+    </h1>
+    <p class="hero-body">
+      A Claude Code skill that loads ServiceNow's exact design system into every conversation — correct colors, typography, components, and patterns. No guessing. No DevTools. Just on-brand output.
+    </p>
+    <div class="cta-row">
+      <a href="#install" class="btn-primary">Install the Skill</a>
+      <a href="#how-it-works" class="btn-outline">See How It Works</a>
+    </div>
+  </div>
+</section>
+
+<!-- Feature Cards -->
+<section class="section-dark" id="features">
+  <h2 class="section-title">What the skill does</h2>
+  <div class="card-grid">
+
+    <div class="card">
+      <span class="card-tag">Brand Accuracy</span>
+      <h3>Exact tokens, every time</h3>
+      <p>Canvas <code>#032d42</code>, green <code>#63df4e</code>, three radii, no box-shadows. Every non-obvious brand rule is encoded so Claude stops approximating and starts producing pixel-perfect output.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-tag">Two Modes</span>
+      <h3>Light &amp; dark, fully specified</h3>
+      <p>Light mode for marketing and product pages. Dark mode with a four-step brightness ladder — <code>#021a26</code> through <code>#063e5a</code> — for platform-depth interfaces. One skill, both covered.</p>
+    </div>
+
+    <div class="card">
+      <span class="card-tag">Verification</span>
+      <h3>Built-in iteration checklist</h3>
+      <p>A 12-point checklist runs before Claude delivers any artifact — catching color drift, unauthorized border-radii, wrong typography weights, and missing aurora patterns before they reach you.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Benefit Grid -->
+<section class="section-white">
+  <h2 class="section-title">Built for how you actually work</h2>
+  <div class="benefit-grid">
+
+    <div class="benefit">
+      <h3>Zero research overhead</h3>
+      <p>No more inspecting servicenow.com, pulling hex values from DevTools, or cross-referencing spacing tokens in a separate tab. The skill carries the full design system into every Claude conversation.</p>
+    </div>
+
+    <div class="benefit">
+      <h3>Consistent across your team</h3>
+      <p>One shared skill means every teammate's Claude produces the same brand-compliant output — prototypes, mockups, slide decks, and dashboards all speak the same visual language.</p>
+    </div>
+
+    <div class="benefit">
+      <h3>Progressive detail on demand</h3>
+      <p>A lean 44-line SKILL.md loads the always-needed rules in milliseconds. Full typography tables, breakpoint specs, and dark-mode elevation tiers load from reference files only when a step calls for them.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section-dark" id="how-it-works">
+  <h2 class="section-title">How it works</h2>
+  <div class="steps">
+
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <h3>Choose the mode</h3>
+        <p>Light mode — navy-teal canvas <code>#032d42</code> — is the default for marketing and product pages. Say "dark mode" or describe a platform-depth interface and Claude switches to the abyssal canvas with the full four-tier brightness ladder.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <h3>Apply the non-negotiable rules</h3>
+        <p>Eight brand rules load immediately: pill-only buttons at <code>500px</code> radius, accent-only green, three radii (<code>16px</code> / <code>24px</code> / <code>500px</code>), no box-shadows, aurora gradient on the banner only, Inter as the font substitute, weight ceiling at 700.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <h3>Build with ready-to-use prompts</h3>
+        <p>A component library covers heroes, primary CTAs, sub-nav bars, floating FAB pills, feature cards, benefit grids, gradient-border featured cards, and dotted particle backgrounds — Claude composites them into your artifact.</p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body">
+        <h3>Verify before delivery</h3>
+        <p>The 12-point checklist confirms canvas color, brightness ladder, green usage, radius system, typography weights, shadow policy, aurora placement, floating FABs, and sub-nav active-tab underlines before Claude hands off the output.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Install -->
+<section class="install-section" id="install">
+  <h2>Ready to ship on-brand artifacts?</h2>
+  <p class="sub">Drop the skill into your Claude Code setup. Every ServiceNow-styled output comes out right the first time.</p>
+
+  <div class="install-box">
+    <p class="code-label">Skill location</p>
+    <pre>~/.claude/skills/servicenow-design/</pre>
+
+    <p class="code-label">Files included</p>
+    <pre>SKILL.md                        ← 44-line workflow
+references/tokens.md            ← colors, typography, hero formula
+references/components.md        ← component prompts + checklist
+references/design-light.md      ← full light-mode spec
+references/design-dark.md       ← full dark-mode spec</pre>
+  </div>
+
+  <div class="cta-row">
+    <a href="https://servicenow-my.sharepoint.com/:u:/p/adam_celli/IQDyAtO677RvSaSa_oDP-7mnAb9ZKlAg3vd7I_5hx-S7KN8?e=BY4vFX" target="_blank" rel="noopener" class="btn-primary">Download servicenow-design.zip</a>
+    <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener" class="btn-outline">View awesome-design-md ↗</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-logo">servicenow<span class="dot">.</span></div>
+  <p class="footer-meta">
+    Design tokens from <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener">VoltAgent / awesome-design-md</a>.<br>
+    Skill built for Claude Code by Adam Celli &middot; ServiceNow Public Sector.
+  </p>
+  <p class="footer-note">Not an official ServiceNow product.</p>
+</footer>
+
+<!-- Floating FABs -->
+<div class="fab-stack">
+  <a href="#install" class="fab">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+      <polyline points="7 10 12 15 17 10"/>
+      <line x1="12" y1="15" x2="12" y2="3"/>
+    </svg>
+    Install
+  </a>
+  <a href="https://github.com/VoltAgent/awesome-design-md" target="_blank" rel="noopener" class="fab">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+    </svg>
+    Source
+  </a>
+</div>
+
+<script>
+  /* ── Particle starfield ── */
+  (function () {
+    const canvas = document.getElementById('particle-canvas');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+
+    function resize() {
+      const hero = canvas.parentElement;
+      canvas.width = hero.offsetWidth;
+      canvas.height = hero.offsetHeight;
+    }
+
+    function build() {
+      resize();
+      particles = [];
+      const count = Math.floor((canvas.width * canvas.height) / 5500);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          r: Math.random() * 1.6 + 0.4,
+          green: Math.random() > 0.45,
+          opacity: Math.random() * 0.45 + 0.15,
+        });
+      }
+      render();
+    }
+
+    function render() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const p of particles) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        const alpha = Math.round(p.opacity * 255).toString(16).padStart(2, '0');
+        ctx.fillStyle = (p.green ? '#63df4e' : '#52b8ff') + alpha;
+        ctx.fill();
+      }
+    }
+
+    window.addEventListener('resize', build);
+    build();
+  })();
+
+  /* ── Sub-nav active state ── */
+  (function () {
+    const links = document.querySelectorAll('.sub-nav-tabs a');
+    const sections = ['features', 'how-it-works', 'install'];
+
+    window.addEventListener('scroll', () => {
+      let current = '';
+      for (const id of sections) {
+        const el = document.getElementById(id);
+        if (el && window.scrollY >= el.offsetTop - 80) current = id;
+      }
+      links.forEach(a => {
+        a.classList.toggle('active', a.dataset.section === current);
+      });
+    });
+  })();
+</script>
+</body>
+</html>
